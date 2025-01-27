@@ -96,22 +96,22 @@ export default abstract class GameShell {
             false
         );
 
+        canvas.onfocus = this.onfocus;
+        canvas.onblur = this.onblur;
+
         // pc
         canvas.onmousedown = this.onmousedown;
         canvas.onmouseup = this.onmouseup;
         canvas.onmouseenter = this.onmouseenter;
         canvas.onmouseleave = this.onmouseleave;
         canvas.onmousemove = this.onmousemove;
-        canvas.onfocus = this.onfocus;
-        canvas.onblur = this.onblur;
+        canvas.onkeydown = this.onkeydown;
+        canvas.onkeyup = this.onkeyup;
 
         if (this.isMobile) {
             canvas.ontouchstart = this.ontouchstart;
             canvas.ontouchend = this.ontouchend;
             canvas.ontouchmove = this.ontouchmove;
-        } else {
-            canvas.onkeydown = this.onkeydown;
-            canvas.onkeyup = this.onkeyup;
         }
 
         // Preventing mouse events from bubbling up to the context menu in the browser for our canvas.
@@ -461,6 +461,7 @@ export default abstract class GameShell {
         }
     };
 
+    // todo: this.time prevents mice from working on mobile
     private onmousedown = (e: MouseEvent): void => {
         this.touching = false;
         //Don't 'reset' position (This fixes right click in Android)
@@ -861,7 +862,7 @@ export default abstract class GameShell {
         const fixedWidth: number = 789;
         const fixedHeight: number = 532;
 
-        if (this.isFullScreen()) {
+        if (this.isFullScreen() && e.target) {
             const element: HTMLElement = e.target as HTMLElement;
             const br: DOMRect = element.getBoundingClientRect();
             const ratio: number = window.innerHeight / canvas.height;
