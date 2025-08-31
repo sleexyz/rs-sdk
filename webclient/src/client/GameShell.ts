@@ -23,13 +23,13 @@ export default abstract class GameShell {
     public mouseButton: number = 0;
     public mouseX: number = -1;
     public mouseY: number = -1;
-    protected lastMouseClickButton: number = 0;
-    protected lastMouseClickX: number = 0;
-    protected lastMouseClickY: number = 0;
+    protected nextMouseClickButton: number = 0;
+    protected nextMouseClickX: number = 0;
+    protected nextMouseClickY: number = 0;
     public mouseClickButton: number = 0;
     public mouseClickX: number = -1;
     public mouseClickY: number = -1;
-    protected lastMouseClickTime: number = 0;
+    protected nextMouseClickTime: number = 0;
     public mouseClickTime: number = 0;
 
     public actionKey: number[] = [];
@@ -202,11 +202,11 @@ export default abstract class GameShell {
             await sleep(delta);
 
             while (count < 256) {
-                this.mouseClickButton = this.lastMouseClickButton;
-                this.mouseClickX = this.lastMouseClickX;
-                this.mouseClickY = this.lastMouseClickY;
-                this.mouseClickTime = this.lastMouseClickTime;
-                this.lastMouseClickButton = 0;
+                this.mouseClickButton = this.nextMouseClickButton;
+                this.mouseClickX = this.nextMouseClickX;
+                this.mouseClickY = this.nextMouseClickY;
+                this.mouseClickTime = this.nextMouseClickTime;
+                this.nextMouseClickButton = 0;
 
                 await this.update();
 
@@ -414,34 +414,34 @@ export default abstract class GameShell {
         if (e.clientX > 0 || e.clientY > 0) this.setMousePosition(e);
 
         this.idleCycles = performance.now();
-        this.lastMouseClickX = this.mouseX;
-        this.lastMouseClickY = this.mouseY;
-        this.lastMouseClickTime = performance.now();
+        this.nextMouseClickX = this.mouseX;
+        this.nextMouseClickY = this.mouseY;
+        this.nextMouseClickTime = performance.now();
 
         if (this.isMobile && !this.isCapacitor) {
             if (this.insideMobileInputArea() && !this.insideUsernameArea() && !this.inPasswordArea() && !this.insideChatPopupArea()) {
                 // Negate the mousedown event - it's inside mobile input area
                 // It will be handled by mouseup.
-                this.lastMouseClickButton = 1;
+                this.nextMouseClickButton = 1;
                 this.mouseButton = 1;
                 return;
             }
 
             const eventTime: number = e.timeStamp;
             if (eventTime >= this.time + 500) {
-                this.lastMouseClickButton = 2;
+                this.nextMouseClickButton = 2;
                 this.mouseButton = 2;
             } else {
-                this.lastMouseClickButton = 1;
+                this.nextMouseClickButton = 1;
                 this.mouseButton = 1;
             }
         } else {
             if (e.button === 2) {
-                this.lastMouseClickButton = 2;
+                this.nextMouseClickButton = 2;
                 this.mouseButton = 2;
             } else if (e.button === 0) {
                 // custom: explicitly check left-mouse button so middle mouse is ignored
-                this.lastMouseClickButton = 1;
+                this.nextMouseClickButton = 1;
                 this.mouseButton = 1;
             }
         }
@@ -455,7 +455,7 @@ export default abstract class GameShell {
         }
 
         if (InputTracking.enabled) {
-            InputTracking.mousePressed(this.lastMouseClickX, this.lastMouseClickY, e.button);
+            InputTracking.mousePressed(this.nextMouseClickX, this.nextMouseClickY, e.button);
         }
     }
 
