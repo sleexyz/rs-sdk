@@ -302,6 +302,7 @@ if(last_useitem = rope) {
     p_delay(0);
     loc_anim(ropeswing_long);
     ~agility_exactmove(human_ropeswing_long, 20, 0, coord, movecoord(loc_coord, 6, 0, 0), 45, 70, ^exact_east, false);
+    sound_synth(swing_across, 0, 0);
     mes("You skillfully swing across.");
     return;
 }
@@ -326,6 +327,7 @@ if(coordx(coord) > coordx(loc_coord)) {
 }
 p_delay(0);
 mes("You climb over the low wall.");
+sound_synth(climb_wall, 0, 0);
 ~agility_exactmove(human_walk_style, 30, 2, coord, $end, 30, 90, $dir, true);
 
 [opheld2,rockcake]

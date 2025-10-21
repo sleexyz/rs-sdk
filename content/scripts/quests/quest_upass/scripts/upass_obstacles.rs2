@@ -25,6 +25,7 @@ if(stat_random(agility, 95, 305) = false) {
     return;
 }
 mes("...and step down the other side.");
+sound_synth(climbing_loop, 3, 4);
 ~agility_exactmove(human_walk_style, 0, 1, coord, $end, 0, 60, $dir, true); // probably same seq for all directions
 
 [oploc1,upass_swampbubbles1]
@@ -118,6 +119,7 @@ if(stat_random(agility, 100, 410) = false) {
 }
 loc_anim(ropeswing_long);
 ~agility_exactmove(human_ropeswing_long, 20, 0, $start_pos, movecoord($start_pos, 4, 0, 0), 45, 70, ^exact_east, false);
+sound_synth(swing_across, 0, 0);
 mes("You skillfully swing across.");
 mes("The rope gets tangled in some stalagmites.");
 p_delay(1);
@@ -140,6 +142,7 @@ if(%upass_swampswing_used >= map_clock) {
 if($delay > 0) p_delay($delay);
 loc_anim(ropeswing_long);
 ~agility_exactmove(human_ropeswing_long, 20, 0, $start_pos, movecoord($start_pos, -5, 0, 0), 45, 70, ^exact_west, false);
+sound_synth(swing_across, 0, 0);
 mes("You skillfully swing across.");
 
 [oploc1,upass_speartrap]
@@ -298,6 +301,7 @@ if(coordx(coord) > coordx(loc_coord)) {
 } else {
     $end = movecoord(loc_coord, 1, 0, 0);
 }
+sound_synth(log_balance, 2, 0);
 ~agility_force_move(0, human_walk_logbalance, movecoord(coord, calc((coordx($end) - coordx(coord)) / 2), 0, calc((coordz($end) - coordz(coord)) / 2)));
 // https://youtu.be/n_ip_vEDbCA?si=0_EUH-TcBp6oAAZL&t=547
 if(stat_random(agility, 90, 300) = false) {
@@ -310,6 +314,7 @@ if(stat_random(agility, 90, 300) = false) {
         $dir = ^exact_north;
     }
     anim(human_walk_logbalance_stumble, 10);
+    sound_synth(stumble_loop, 5, 10);
     mes("...and fall off it.");
     p_delay(0);
     p_exactmove(coord, movecoord(coord, 0, 0, $dz), 30, 45, $dir);
@@ -369,7 +374,7 @@ p_delay(1);
 if(stat_random(agility, 90, 300) = false) {
     if(random(2) = 0) p_teleport(0_36_153_31_29);
     else p_teleport(0_36_154_29_10);
-    // sound fall_land
+    sound_synth(fall_land, 0, 0);
     mes("... but you slip and tumble into the darkness.");
     say("Ouch!");
     ~damage_self(calc(((stat(hitpoints) * 25) / 100) + 4));

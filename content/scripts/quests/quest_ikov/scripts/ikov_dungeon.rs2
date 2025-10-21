@@ -142,7 +142,7 @@ if(%ikov >= ^ikov_disabled_trap) {
     return;
 }
 p_delay(0);
-// stumble_loop sound
+sound_synth(stumble_loop, 10, 0); // TODO: confirm loops (I don't have the logs anymore)
 anim(human_falling_4, 0);
 p_delay(0);
 p_teleport(0_41_153_58_63);

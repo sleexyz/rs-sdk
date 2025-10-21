@@ -249,6 +249,7 @@ mes("You start climbing the rocky elevation.");
 // completely guessing on how this works, rsc messages and damage
 ~agility_force_move(0, human_climbing, loc_coord);
 if(stat_random(agility, 150, 250) = false) {
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_climbing_fall, 0, 2, coord, movecoord(loc_coord, -4, 0, 0), 0, 120, ^exact_east, false);
     anim(null, 0);
     mes("You slip a little and tumble the rest of the way down the slope.");
@@ -263,6 +264,7 @@ mes("You start climbing the rocky elevation.");
 // completely guessing on how this works, rsc messages and damage
 ~agility_force_move(0, human_climbing_down, loc_coord);
 if(stat_random(agility, 150, 250) = false) {
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_climbing_fall, 0, 0, coord, movecoord(coord, 2, 0, 0), 0, 50, ^exact_west, false);
     anim(null, 0);
     mes("You slip a little and tumble the rest of the way down the slope.");

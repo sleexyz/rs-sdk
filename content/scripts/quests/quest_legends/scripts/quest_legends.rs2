@@ -1632,13 +1632,13 @@ p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
     say("Arrgggghhhhhhhhhhhhhhh...........!!!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_stumble_and_hang, 30, 1, coord, movecoord(loc_coord, 0, 0, 1), 37, 70, ^exact_east, false);
     ~bas_set_all(human_stumble_and_hang_ready);
     p_delay(5);
     ~update_bas;
     mes("You feel a little nervous from your near fall...");
     ~agility_exactmove(human_stumble_and_hang_climbup, 30, 1, coord, movecoord(loc_coord, -1, 0, 0), 37, 70, ^exact_east, false);
-    // synth_sound(2493 loops 10)
     mes("You lose some Agility!");
     mes("You wrench your arm as you grab for a handhold.");
     ~damage_self(~random_range(1, 10));
@@ -1667,13 +1667,13 @@ p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
     say("Arrgggghhhhhhhhhhhhhhh...........!!!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_stumble_and_hang, 30, 1, coord, movecoord(loc_coord, 1, 0, -1), 37, 50, ^exact_west, false);
     ~bas_set_all(human_stumble_and_hang_ready);
     p_delay(5);
     ~update_bas;
     mes("You feel a little nervous from your near fall...");
     ~agility_exactmove(human_stumble_and_hang_climbup, 30, 1, coord, movecoord(loc_coord, 1, 0, 0), 37, 70, ^exact_west, false);
-    // synth_sound(2493 loops 10)
     mes("You lose some Agility!");
     mes("You wrench your arm as you grab for a handhold.");
     ~damage_self(~random_range(1, 10));
@@ -1703,13 +1703,13 @@ p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
     say("Arrgggghhhhhhhhhhhhhhh...........!!!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_stumble_and_hang, 30, 1, coord, movecoord(loc_coord, -1, 0, 0), 37, 70, ^exact_north, false);
     ~bas_set_all(human_stumble_and_hang_ready);
     p_delay(5);
     ~update_bas;
     mes("You feel a little nervous from your near fall...");
     ~agility_exactmove(human_stumble_and_hang_climbup, 30, 1, coord, movecoord(loc_coord, 0, 0, -1), 37, 70, ^exact_north, false);
-    // synth_sound(2493 loops 10)
     mes("You lose some Agility!");
     mes("You wrench your arm as you grab for a handhold.");
     ~damage_self(~random_range(1, 10));
@@ -1740,6 +1740,7 @@ p_teleport(loc_coord);
 p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_wobbleandfall_l, 30, 0, coord, movecoord(loc_coord, -2, 0, 2), 52, 100, ^exact_east, false);
     ~set_walkbas(human_falling_end);
     p_delay(1);
@@ -1789,6 +1790,7 @@ p_teleport(loc_coord);
 p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_wobbleandfall_l, 30, 0, coord, movecoord(loc_coord, 3, 0, 0), 52, 100, ^exact_south, false);
     ~set_walkbas(human_falling_end);
     p_delay(1);
@@ -1838,6 +1840,7 @@ p_teleport(movecoord(loc_coord, 1, 0, 1));
 p_delay(1);
 if(stat_random(agility, 110, 250) = false) {
     mes("You slip and fall!");
+    sound_synth(stumble_loop, 10, 0);
     ~agility_exactmove(human_wobbleandfall_l, 30, 0, coord, movecoord(coord, 2, 0, -2), 52, 100, ^exact_south, false);
     ~set_walkbas(human_falling_end);
     p_delay(1);
