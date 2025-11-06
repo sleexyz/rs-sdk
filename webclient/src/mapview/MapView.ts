@@ -19,9 +19,9 @@ export class MapView extends GameShell {
     readonly startX: number = 3200;
     readonly startZ: number = 3200;
     readonly sizeX: number = 20 << 6;
-    readonly sizeZ: number = 21 << 6;
-    readonly originX: number = 35 << 6;
-    readonly originZ: number = 43 << 6;
+    readonly sizeZ: number = 19 << 6;
+    readonly originX: number = 36 << 6;
+    readonly originZ: number = 44 << 6;
 
     // underground
     // readonly startX: number = 3200;
@@ -600,10 +600,10 @@ export class MapView extends GameShell {
     // ----
     async loadWorldmap(): Promise<Jagfile> {
         // todo: SHA check and redownload
-        let data: Uint8Array | undefined = await this.db?.cacheload('worldmap.dat');
-        if (data) {
-            return new Jagfile(data);
-        }
+        let data: Uint8Array | undefined = undefined; // await this.db?.cacheload('worldmap.dat');
+        // if (data) {
+        //     return new Jagfile(data);
+        // }
 
         let retry: number = 5;
         while (!data) {
@@ -625,7 +625,7 @@ export class MapView extends GameShell {
             }
         }
 
-        await this.db?.cachesave('worldmap.dat', data);
+        // await this.db?.cachesave('worldmap.dat', data);
         return new Jagfile(data);
     }
 
