@@ -16,6 +16,8 @@ bots/*/
 # polo
 bashes.log
 BLOCKING.md
+PROMPT-*.md
+harbor-run.log
 
 ralph-harbor.log
 polo-harbor.log
