@@ -34,6 +34,8 @@ export default {
     NODE_AUTO_SUBSCRIBE_MEMBERS: tryParseBoolean(process.env.NODE_AUTO_SUBSCRIBE_MEMBERS, true),
     // addxp multiplier
     NODE_XPRATE: tryParseInt(process.env.NODE_XPRATE, 1),
+    // game tick rate in ms (default 420ms, lower = faster simulation)
+    NODE_TICKRATE: tryParseInt(process.env.NODE_TICKRATE, 420),
     // infinite run energy
     NODE_INFINITE_RUN: tryParseBoolean(process.env.NODE_INFINITE_RUN, true),
     // production mode!
