@@ -86,6 +86,10 @@ All predictions were correct:
 2. **`check_level.ts` had wrong field name** — Used `wc?.xp` but the SDK type is `wc?.experience`. Only affected display, not reward calculation.
 3. **Container startup is fast** — Engine starts in ~2s, gateway instantly, bot login + tutorial skip takes ~10s. Total: well under 30s.
 4. **Inventory starts full from tutorial** — The bot has 18 tutorial items. Agents need to drop items before chopping or they'll fill up after ~10 trees.
+5. **Harbor uses deprecated `memory`/`storage` in hello-world example** — But the `EnvironmentConfig` schema prefers `memory_mb`/`storage_mb`. We use the new fields correctly.
+6. **Harbor mounts `/logs/verifier` and `/logs/agent` as volumes** — via `docker-compose-base.yaml`. So `reward.txt` written inside the container is visible to the host verifier. The verifier reads it as `float(content)`.
+7. **Harbor's Claude Code agent writes MCP config to user-scope `.claude.json`** — not project-scope `.mcp.json`. This means the MCP server is loaded without a trust dialog, which is necessary for headless benchmark runs.
+8. **stdio MCP is simpler for single-container tasks** — The hello-mcp example uses `streamable-http` with a separate docker service. Our stdio approach avoids the extra service, healthcheck, and docker-compose overlay. Both work, but stdio is less moving parts.
 
 ---
 

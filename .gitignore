@@ -12,3 +12,10 @@ server.json
 # Bot folders (except template)
 bots/*/
 !bots/_template/
+
+# polo
+bashes.log
+BLOCKING.md
+
+ralph-harbor.log
+polo-harbor.log
