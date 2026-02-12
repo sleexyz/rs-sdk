@@ -34,15 +34,15 @@ WORKDIR /app
 
 # Install all workspace dependencies
 RUN bun install
-RUN cd engine && bun install
-RUN cd gateway && bun install
-RUN cd webclient && bun install && bun run build
-RUN cp -r webclient/out/bot engine/public/bot
+RUN cd server/engine && bun install
+RUN cd server/gateway && bun install
+RUN cd server/webclient && bun install && bun run build
+RUN cp -r server/webclient/out/bot server/engine/public/bot
 RUN cd mcp && bun install
 
 # Pre-pack game cache and let engine fully start so all data files are generated.
 # Wait for "World ready" in output, then kill. This ensures maps, scripts, configs are all packed.
-RUN cd engine && \
+RUN cd server/engine && \
     bun run src/app.ts > /tmp/engine.log 2>&1 & \
     for i in $(seq 1 300); do \
         grep -q "World ready" /tmp/engine.log 2>/dev/null && break; \
@@ -56,7 +56,7 @@ COPY bot.env bots/agent/bot.env
 
 # Copy entrypoint and helper scripts
 COPY entrypoint.sh /entrypoint.sh
-COPY launch-bot.ts /app/gateway/launch-bot.ts
+COPY launch-bot.ts /app/server/gateway/launch-bot.ts
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
