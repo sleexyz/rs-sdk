@@ -19,3 +19,9 @@ BLOCKING.md
 
 ralph-harbor.log
 polo-harbor.log
+
+ralph-harbor-e2e.log
+polo-harbor-e2e.log
+
+ralph-e2e.log
+polo-e2e.log
